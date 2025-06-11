@@ -12,19 +12,21 @@ OLLAMA_PORT=${OLLAMA_PORT:-11434}
 COMPOSE_FILE=${COMPOSE_FILE:-deployment/docker/docker-compose.yml}
 OLLAMA_SERVICE=${OLLAMA_SERVICE:-ollama}
 
+DOCKER_COMPOSE_BIN="docker compose"
+
 start_ollama() {
     echo "Starting Ollama service ($OLLAMA_SERVICE) on port $OLLAMA_PORT..."
-    docker compose -f "$COMPOSE_FILE" up -d "$OLLAMA_SERVICE"
+    $DOCKER_COMPOSE_BIN -f "$COMPOSE_FILE" up -d "$OLLAMA_SERVICE"
     echo "Ollama should be running at http://localhost:$OLLAMA_PORT"
 }
 
 stop_ollama() {
     echo "Stopping Ollama service ($OLLAMA_SERVICE)..."
-    docker compose -f "$COMPOSE_FILE" stop "$OLLAMA_SERVICE"
+    $DOCKER_COMPOSE_BIN -f "$COMPOSE_FILE" stop "$OLLAMA_SERVICE"
 }
 
 status_ollama() {
-    docker compose -f "$COMPOSE_FILE" ps "$OLLAMA_SERVICE"
+    $DOCKER_COMPOSE_BIN -f "$COMPOSE_FILE" ps "$OLLAMA_SERVICE"
 }
 
 check_model() {

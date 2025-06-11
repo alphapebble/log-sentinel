@@ -12,15 +12,17 @@ API_PORT=${API_PORT:-8000}
 COMPOSE_FILE=${COMPOSE_FILE:-deployment/docker/docker-compose.yml}
 SERVICE_NAME=${SERVICE_NAME:-backend}
 
+DOCKER_COMPOSE_BIN="docker compose"
+
 start_api() {
     echo "Starting API server ($SERVICE_NAME) on port $API_PORT..."
-    docker compose -f "$COMPOSE_FILE" up -d "$SERVICE_NAME"
+    $DOCKER_COMPOSE_BIN -f "$COMPOSE_FILE" up -d "$SERVICE_NAME"
     echo "API server should be running at http://localhost:$API_PORT"
 }
 
 stop_api() {
     echo "Stopping API server ($SERVICE_NAME)..."
-    docker compose -f "$COMPOSE_FILE" stop "$SERVICE_NAME"
+    $DOCKER_COMPOSE_BIN -f "$COMPOSE_FILE" stop "$SERVICE_NAME"
 }
 
 restart_api() {
@@ -30,7 +32,7 @@ restart_api() {
 }
 
 status_api() {
-    docker compose -f "$COMPOSE_FILE" ps "$SERVICE_NAME"
+    $DOCKER_COMPOSE_BIN -f "$COMPOSE_FILE" ps "$SERVICE_NAME"
 }
 
 case $1 in

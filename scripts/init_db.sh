@@ -11,10 +11,12 @@ fi
 COMPOSE_FILE=${COMPOSE_FILE:-deployment/docker/docker-compose.yml}
 CLICKHOUSE_SERVICE=${CLICKHOUSE_SERVICE:-clickhouse}
 
+DOCKER_COMPOSE_BIN="docker compose"
+
 # Function to initialize the ClickHouse database
 init_clickhouse() {
     echo "Initializing ClickHouse database..."
-    docker compose -f "$COMPOSE_FILE" exec "$CLICKHOUSE_SERVICE" clickhouse-client --query "CREATE DATABASE IF NOT EXISTS logs;"
+    $DOCKER_COMPOSE_BIN -f "$COMPOSE_FILE" exec "$CLICKHOUSE_SERVICE" clickhouse-client --query "CREATE DATABASE IF NOT EXISTS logs;"
 }
 
 # Function to initialize the Qdrant database

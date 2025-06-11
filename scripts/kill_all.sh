@@ -10,8 +10,10 @@ fi
 
 COMPOSE_FILE=${COMPOSE_FILE:-deployment/docker/docker-compose.yml}
 
+DOCKER_COMPOSE_BIN="docker compose"
+
 echo "Stopping all Docker Compose services defined in $COMPOSE_FILE..."
-docker compose -f "$COMPOSE_FILE" down
+$DOCKER_COMPOSE_BIN -f "$COMPOSE_FILE" down
 
 echo "If you have any local Python processes to kill, use:"
 echo "  pkill -f 'uvicorn app.main:app'"
