@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  clickhouse:
+    image: clickhouse/clickhouse-server:latest
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    volumes:
+      - ./storage/clickhouse_data:/var/lib/clickhouse
+    environment:
+      - CLICKHOUSE_DB=logs
+  # Add other services (e.g., Pinecone, Qdrant, Ollama) as needed

@@ -1,0 +1,13 @@
+# requirements.txt for CyberSec Log Analyzer
+clickhouse-connect
+duckdb
+pandas
+xgboost
+scikit-learn
+streamlit
+fastapi
+uvicorn
+openai
+qdrant-client
+pinecone-client
+python-dotenv
